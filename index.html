@@ -2,25 +2,116 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>财务主管/经理高频面试题库</title>
+  
+  <!-- 引入 Markdown 解析库 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <style>
-    body { font-family: sans-serif; padding: 20px; line-height: 1.6; max-width: 900px; margin: 0 auto; background: #f9f9f9; }
-    details { background: #fff; padding: 12px 16px; border-radius: 8px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    summary { font-weight: bold; cursor: pointer; color: #1a0dab; }
-    blockquote { background: #f0f4f8; border-left: 4px solid #2b6cb0; margin: 10px 0 0 0; padding: 10px 15px; }
-    code { background: #fee2e2; color: #991b1b; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+    /* ================= 默认亮色主题 (Light Mode) ================= */
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --summary-color: #1e40af;
+      --quote-bg: #f1f5f9;
+      --quote-border: #3b82f6;
+      --tip-bg: #eff6ff;
+      --tip-border: #60a5fa;
+      --code-bg: #fee2e2;
+      --code-color: #991b1b;
+      --border-color: #e2e8f0;
+    }
+
+    /* ================= 深色模式自动跟随 (Dark Mode) ================= */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #0f172a;
+        --card-bg: #1e293b;
+        --text-color: #f8fafc;
+        --summary-color: #60a5fa;
+        --quote-bg: #334155;
+        --quote-border: #3b82f6;
+        --tip-bg: #1e3a8a;
+        --tip-border: #3b82f6;
+        --code-bg: #450a0a;
+        --code-color: #fca5a5;
+        --border-color: #334155;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1, h2, h3 { color: var(--text-color); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+    
+    /* 提示框渲染 */
+    .tip-box {
+      background: var(--tip-bg);
+      border-left: 4px solid var(--tip-border);
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin: 16px 0;
+    }
+
+    /* 题库折叠卡片 */
+    details {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--summary-color);
+      font-size: 1.05rem;
+    }
+
+    blockquote {
+      background: var(--quote-bg);
+      border-left: 4px solid var(--quote-border);
+      margin: 12px 0 0 0;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    code {
+      background: var(--code-bg);
+      color: var(--code-color);
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
   </style>
 </head>
 <body>
-  
+
+<div id="content">
+<!-- 预留动态渲染区域 -->
+</div>
+
+<!-- 把你的完整 Markdown 贴在下面的 template 标签内 -->
+<template id="markdown-source">
+
 # 财务主管/经理高频面试题库与专属实战答案
 
 ::: tip 💡 刷题小贴士
 点击题目名称即可展开查看专属解析，支持多道题目同时展开对比。
 :::
-
-
-
 
 ## 一、 核心风控、亮点案例与系统提效
 
@@ -73,7 +164,6 @@
 > 关于业务抱怨流程繁琐：在测试阶段，我们发现有些卡位设得太死，因此推动实施团队做了‘差异化分级审批’——小额常态化费用走系统自动快速审核，大额和敏感费用触发严格卡位。用‘抓大放小’的系统规则，既保住了财务风控底线，又没牺牲业务的审批效率。
 
 </details>
-
 
 ## 二、 资金管理、融资与跨行业迁移
 
@@ -133,7 +223,6 @@
 
 </details>
 
-
 ## 三、 履历背景、离职原因与薪资锚定
 
 <details>
@@ -148,13 +237,13 @@
 </details>
 
 <details>
-<summary><b>10. 你原公司干了 11 年为什么一直没有晋升？为什么拿 1 万块？现在凭什么要 1.5 万 - 2 万？</b> <code>薪资谈判与履历考问</code></summary>
+<summary><b>10. 你在融捷干了 11 年为什么一直没有晋升？为什么拿 1 万块？现在凭什么要 1.5 万 - 2 万？</b> <code>薪资谈判与履历考问</code></summary>
 
 > **【我的专属答案解析】**
 > 
 > 我非常理解您对这个问题的关注。11年在一个平台，表面上看我的行政头衔变化不大，但实际上我的专业能力、职责范围和实质价值经历了三次非常关键的‘内部晋升’：
 > 
-> 第一，关于‘没有行政晋升’的真实情况：在这样的大型集团里，组织架构与管理层梯队极其稳定，行政编制是高度固化的。但在实质工作职责上，我从早期的单模块账务，逐步扩展到集团多账套合并报表、财务分析、费控系统 UAT 测试，再到近几年独立操盘实体全盘账务，负责金融衍生品/利息精算，并担当核心账务的‘最后一道质控卡位人’，指导和复核 3-5 名基础财务的账务质量。我虽然没有挂名行政经理，但我早已在履行资深主管的管理与风控职责。
+> 第一，关于‘没有行政晋升’的真实情况：在融捷这样的大型集团里，组织架构与管理层梯队极其稳定，行政编制是高度固化的。但在实质工作职责上，我从早期的单模块账务，逐步扩展到集团多账套合并报表、财务分析、费控系统 UAT 测试，再到近几年独立操盘实体全盘账务，负责金融衍生品/利息精算，并担当核心账务的‘最后一道质控卡位人’，指导和复核 3-5 名基础财务的账务质量。我虽然没有挂名行政经理，但我早已在履行资深主管的管理与风控职责。
 > 
 > 第二，关于‘为什么在这个时间点选择离开’：在这 11 年里，我不仅沉淀了大厂正规的内控视野，更利用业余时间考取了中级会计、中级经济师，并通过了法考与税务师的核心科目。我目前的专业能力与法税复合底蕴，已经到了可以承担更多‘全盘管理、综合风控与业财深度赋能’的阶段。大集团成熟固化的架构短期内无法提供这样的管理空间，所以我选择主动走出来，寻找一个能让我发挥综合价值的平台。
 > 
@@ -187,7 +276,6 @@
 > 这种‘既做过宏观合并/分析，又能独立操盘实体全盘’的轮岗经历，让我的知识结构极其完整，既有大局观，又能下场把细节抓得非常精准。
 
 </details>
-
 
 ## 四、 团队管理与入职落地规划
 
@@ -267,7 +355,6 @@
 
 </details>
 
-
 ## 五、 面试反问、分轮表达与高阶真题
 
 <details>
@@ -305,7 +392,7 @@
 
 > **【我的专属答案解析】**
 > 
-> 初面见 HR（展现技能与规范）：我之前集团等大型企业担任资深账务主管/核心账务负责人，主要负责集团多实体全盘账务处理、合并报表编制、资金偏离度管控以及财税合规。在过往工作中，我通过‘建立退换货规格与单货票勾稽 SOP’、‘推行报销与预算合规指南’以及‘参与控费费控系统 UAT 测试与推广’等举措，系统推进财务规范化与提效。在近几年内，指导并复核 3-5 名基础财务人员的账务质量，实现全盘核算零差错，将跨部门报销退单率降低了 70%，月度结账效率提升，资金偏离大幅缩减。这段经历让我积累了 17 年极其扎实的大厂内控视野，同时培养了我‘法税复合风控’与‘资金精算’的能力（持有中级会计、中级经济师，通过法考及税务师核心科目）。这与贵公司目前招聘‘既懂大厂规范内控、又能下场把控风险’的财务主管岗位高度匹配。如果有幸加入，相信我能凭借成熟的经验很快融入团队并开展工作。
+> 初面见 HR（展现技能与规范）：我之前在融捷集团等大型企业担任资深账务主管/核心账务负责人，主要负责集团多实体全盘账务处理、合并报表编制、资金偏离度管控以及财税合规。在过往工作中，我通过‘建立退换货规格与单货票勾稽 SOP’、‘推行报销与预算合规指南’以及‘参与控费费控系统 UAT 测试与推广’等举措，系统推进财务规范化与提效。在近几年内，指导并复核 3-5 名基础财务人员的账务质量，实现全盘核算零差错，将跨部门报销退单率降低了 70%，月度结账效率提升，资金偏离大幅缩减。这段经历让我积累了 17 年极其扎实的大厂内控视野，同时培养了我‘法税复合风控’与‘资金精算’的能力（持有中级会计、中级经济师，通过法考及税务师核心科目）。这与贵公司目前招聘‘既懂大厂规范内控、又能下场把控风险’的财务主管岗位高度匹配。如果有幸加入，相信我能凭借成熟的经验很快融入团队并开展工作。
 > 
 > 复试见部门 Leader（展现业绩与实操）：我在上一段集团工作中，主要统筹核心账务中枢与资金/财税风控，年度负责千万级资金利息精算与多账套合并报表。我主要做了以下几点核心工作：第一，进销存与发票合规穿透，深入业务排查‘退换货规格不符导致单货票不勾稽’的顽疾，联合仓库与采购制定 SOP，出清历史挂账并规避了企业所得税税前扣除的重大税务稽核风险；第二，资金与费用降本提效，建立‘月计划、周滚动’资金偏离度监控，精准精算金融机构利息与中收发票，同时在预算审核中通过同比与量价拆解‘挤水分’，帮助部门削减了近 15% 的非必要开支；第三，系统测试与流程标准化，深度参与费用控费系统（费控系统）的 UAT 验收测试与刚性卡位设置，将财务规则嵌入系统，实现了事前预警与对账自动化。其中，个人认为做得最好的是‘用法税思维做供应链风控’，做到了‘三流合一’与资金安全的绝对卡位。这让我深刻掌握了大型企业从业务端到账务端的全流程风控。贵公司目前正处于业务拓展/规范升级期，我有信心能够作为您最得力的助手，把团队的账务质量与风控防线守得滴水不漏。
 > 
@@ -329,5 +416,21 @@
 > 5. 关于‘如何看待过往履历时间/跳槽’：对于过往的履历时间，我是这样看待的：前期的每一次转换，都是我‘主动进行专业能力版图拼贴’的过程。从早期基础核算，到大厂合规体系建立，再到后续多实体全盘与法税复合能力的补齐，这些经历让我迅速建立了同龄人少有的‘集团大局观 + 复杂业务穿透能力’。但到了我目前的职业阶段，我已经完成了从‘基础会计’到‘复合型资深主管’的能力沉淀。我现在最核心的诉求，就是找一家值得深耕的企业长期沉淀下来，把过去积累的大厂规范、资金风控和法税能力，深度赋能给公司，陪伴公司走过更长远的业务周期。
 
 </details>
+
+</template>
+
+<script>
+  // 获取原始 Markdown 文本
+  let rawMd = document.getElementById('markdown-source').innerHTML;
+  
+  // 转换 VitePress 的 ::: tip 语法为漂亮的提示框 HTML
+  rawMd = rawMd.replace(/:::\s*tip\s*([\s\S]*?):::/g, function(match, p1) {
+    return `<div class="tip-box">${p1.trim()}</div>`;
+  });
+
+  // 使用 marked 渲染 Markdown
+  document.getElementById('content').innerHTML = marked.parse(rawMd);
+</script>
+
 </body>
 </html>
