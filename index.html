@@ -21,8 +21,10 @@
       --tip-border: #60a5fa;
       --border-color: #e2e8f0;
       --search-bg: #ffffff;
-      --index-bg: #e2e8f0;
-      --index-text: #334155;
+      --tag-bg: #f1f5f9;
+      --tag-text: #475569;
+      --tag-hover-bg: #2563eb;
+      --tag-hover-text: #ffffff;
     }
 
     /* ================= 深色模式自动跟随 (Dark Mode) ================= */
@@ -38,8 +40,10 @@
         --tip-border: #3b82f6;
         --border-color: #334155;
         --search-bg: #1e293b;
-        --index-bg: #334155;
-        --index-text: #cbd5e1;
+        --tag-bg: #334155;
+        --tag-text: #cbd5e1;
+        --tag-hover-bg: #3b82f6;
+        --tag-hover-text: #ffffff;
       }
     }
 
@@ -50,88 +54,98 @@
       line-height: 1.7;
       max-width: 960px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 12px 20px 40px 20px;
       transition: background-color 0.3s, color 0.3s;
     }
 
-    /* 固定在顶部的搜索栏与索引容器 */
+    /* 极为紧凑的吸顶搜索与索引栏 */
     .sticky-header {
       position: sticky;
       top: 0;
       z-index: 100;
       background-color: var(--bg-color);
-      padding: 12px 0;
+      padding: 8px 0;
       border-bottom: 1px solid var(--border-color);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
     }
 
+    /* 精简搜索框 */
     .search-box {
       width: 100%;
-      padding: 12px 16px;
-      font-size: 1rem;
-      border: 2px solid var(--border-color);
-      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.92rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
       background-color: var(--search-bg);
       color: var(--text-color);
       outline: none;
       box-sizing: border-box;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .search-box:focus {
       border-color: var(--summary-color);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
     }
 
-    /* 快捷索引标签栏 */
+    /* 单行横向可滑动索引栏（不占纵向高度） */
     .index-container {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-      max-height: 100px;
-      overflow-y: auto;
+      gap: 6px;
+      margin-top: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
+      /* 隐藏滚动条让视觉更干净 */
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .index-container::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
     }
 
     .index-tag {
-      font-size: 0.82rem;
-      padding: 4px 10px;
-      background-color: var(--index-bg);
-      color: var(--index-text);
-      border-radius: 16px;
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      background-color: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 12px;
       text-decoration: none;
-      white-space: nowrap;
+      flex-shrink: 0;
       transition: all 0.2s;
     }
 
     .index-tag:hover {
-      background-color: var(--summary-color);
-      color: #ffffff;
+      background-color: var(--tag-hover-bg);
+      color: var(--tag-hover-text);
     }
 
     h1, h2, h3 { 
       color: var(--text-color); 
       border-bottom: 1px solid var(--border-color); 
       padding-bottom: 8px;
-      scroll-margin-top: 140px; /* 防止锚点跳转时被吸顶栏遮挡 */
+      scroll-margin-top: 90px; /* 防止跳转遮挡 */
     }
     
     /* 提示框 */
     .tip-box {
       background: var(--tip-bg);
       border-left: 4px solid var(--tip-border);
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 6px;
-      margin: 16px 0;
+      margin: 12px 0;
+      font-size: 0.9rem;
     }
 
     /* 题库折叠卡片 */
     details {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      padding: 14px 18px;
-      border-radius: 10px;
-      margin-bottom: 14px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
       transition: background-color 0.3s, border-color 0.3s;
     }
 
@@ -139,34 +153,33 @@
       font-weight: 600;
       cursor: pointer;
       color: var(--summary-color);
-      font-size: 1.05rem;
+      font-size: 1.02rem;
     }
 
     blockquote {
       background: var(--quote-bg);
       border-left: 4px solid var(--quote-border);
-      margin: 12px 0 0 0;
-      padding: 12px 16px;
+      margin: 10px 0 0 0;
+      padding: 10px 14px;
       border-radius: 0 6px 6px 0;
     }
 
-    /* 恢复标签的精美浅红色，同时保持无背景高亮框 */
+    /* 题目标签：保持无背景高亮、精美浅红 */
     code {
       background: transparent !important;
-      color: #e11d48 !important; /* 亮色模式下的柔和精致红色 */
-      font-size: 0.85em;
+      color: #e11d48 !important;
+      font-size: 0.82em;
       font-weight: 500;
-      padding: 2px 6px;
-      border: 1px solid rgba(225, 29, 72, 0.2); /* 加一层极淡的精致红边框，代替原有的厚重高亮背景 */
+      padding: 1px 5px;
+      border: 1px solid rgba(225, 29, 72, 0.25);
       border-radius: 4px;
       margin-left: 6px;
     }
-    
-    /* 深色模式下的标签红 */
+
     @media (prefers-color-scheme: dark) {
       code {
-        color: #f43f5e !important; /* 暗黑模式下高对比度的精致粉红色 */
-        border-color: rgba(244, 63, 94, 0.3);
+        color: #f43f5e !important;
+        border-color: rgba(244, 63, 94, 0.35);
       }
     }
 
@@ -180,11 +193,11 @@
 </head>
 <body>
 
-<!-- 顶部吸顶搜索框与章节索引 -->
+<!-- 极简吸顶搜索与单行滑动索引 -->
 <div class="sticky-header">
-  <input type="text" id="search-input" class="search-box" placeholder="🔍 全局搜索：输入关键词（如：资金偏离、SOP、税筹、BOM、退换货...）" oninput="doSearch()">
+  <input type="text" id="search-input" class="search-box" placeholder="🔍 搜题目/关键词（如：SOP、资金偏离、BOM、税筹...）" oninput="doSearch()">
   <div id="index-tags" class="index-container">
-    <!-- 自动生成的索引按钮将插在这里 -->
+    <!-- 自动生成的单行横向滑动标签 -->
   </div>
 </div>
 
@@ -193,16 +206,15 @@
 </div>
 
 <div id="no-results-msg" class="no-results">
-  未找到与关键词匹配的题目，请尝试更改搜索词。
+  未找到匹配题目，请尝试更换关键词。
 </div>
 
-<!-- 请确保把你的全部 Markdown 内容粘贴到下方 template 标签中 -->
 <template id="markdown-source">
 
 # 财务主管/经理高频面试题库与实战解析
 
 ::: tip 💡 刷题小贴士
-上方提供全局实时搜索及章节快捷索引，点击索引标签可直达对应板块；输入关键词可全库模糊匹配。
+输入关键词自动全库匹配并展开答案；顶部索引支持左右划动快速跳转板块。
 :::
 
 ## 一、 核心风控、亮点案例与系统提效
@@ -1230,37 +1242,34 @@
 </template>
 
 <script>
-  // 1. 获取并渲染 Markdown
+  // 1. 渲染 Markdown
   let rawMd = document.getElementById('markdown-source').innerHTML;
   
-  // 转换 ::: tip 语法
   rawMd = rawMd.replace(/:::\s*tip\s*([\s\S]*?):::/g, function(match, p1) {
     return `<div class="tip-box">${p1.trim()}</div>`;
   });
 
-  // 渲染成 HTML
   document.getElementById('content').innerHTML = marked.parse(rawMd);
 
-  // 2. 自动提取 H2 标题并生成顶部分类索引
+  // 2. 自动生成单行横向可滑动索引
   function buildIndex() {
     const h2Elements = document.querySelectorAll('#content h2');
     const indexContainer = document.getElementById('index-tags');
     
     h2Elements.forEach((h2, index) => {
-      // 赋予 ID 方便跳转
       const sectionId = 'section-' + index;
       h2.id = sectionId;
 
-      // 创建索引标签
       const tag = document.createElement('a');
       tag.className = 'index-tag';
       tag.href = '#' + sectionId;
-      tag.innerText = h2.innerText.replace(/^[一二三四五六七八九十]+\n*\s*/, ''); // 简化展示
+      // 简化章节展示文本
+      tag.innerText = h2.innerText.replace(/^[一二三四五六七八九十]+[、\s]*/, '');
       indexContainer.appendChild(tag);
     });
   }
 
-  // 3. 全局实时模糊搜索功能
+  // 3. 全局搜索
   function doSearch() {
     const keyword = document.getElementById('search-input').value.trim().toLowerCase();
     const cards = document.querySelectorAll('#content details');
@@ -1268,33 +1277,29 @@
     let hasMatch = false;
 
     if (keyword === '') {
-      // 恢复默认状态
       cards.forEach(card => {
         card.style.display = 'block';
-        card.removeAttribute('open'); // 搜索清空时折叠
+        card.removeAttribute('open');
       });
       sections.forEach(sec => sec.style.display = 'block');
       document.getElementById('no-results-msg').style.display = 'none';
       return;
     }
 
-    // 遍历所有折叠题库卡片
     cards.forEach(card => {
       const text = card.innerText.toLowerCase();
       if (text.includes(keyword)) {
         card.style.display = 'block';
-        card.setAttribute('open', 'true'); // 匹配到的题目自动展开答案
+        card.setAttribute('open', 'true');
         hasMatch = true;
       } else {
         card.style.display = 'none';
       }
     });
 
-    // 控制无结果提示
     document.getElementById('no-results-msg').style.display = hasMatch ? 'none' : 'block';
   }
 
-  // 初始化执行索引生成
   buildIndex();
 </script>
 
