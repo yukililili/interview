@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>财务主管/经理高频面试题库</title>
+  <title>财务主管/经理高频面试题库与实战解析</title>
   
   <!-- 引入 Markdown 解析库 -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -19,9 +19,10 @@
       --quote-border: #3b82f6;
       --tip-bg: #eff6ff;
       --tip-border: #60a5fa;
-      --code-bg: #fee2e2;
-      --code-color: #991b1b;
       --border-color: #e2e8f0;
+      --search-bg: #ffffff;
+      --index-bg: #e2e8f0;
+      --index-text: #334155;
     }
 
     /* ================= 深色模式自动跟随 (Dark Mode) ================= */
@@ -31,13 +32,14 @@
         --card-bg: #1e293b;
         --text-color: #f8fafc;
         --summary-color: #60a5fa;
-        --quote-bg: #334155;
+        --quote-bg: #1e293b;
         --quote-border: #3b82f6;
         --tip-bg: #1e3a8a;
         --tip-border: #3b82f6;
-        --code-bg: #450a0a;
-        --code-color: #fca5a5;
         --border-color: #334155;
+        --search-bg: #1e293b;
+        --index-bg: #334155;
+        --index-text: #cbd5e1;
       }
     }
 
@@ -46,15 +48,74 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.7;
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 20px;
       transition: background-color 0.3s, color 0.3s;
     }
 
-    h1, h2, h3 { color: var(--text-color); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+    /* 固定在顶部的搜索栏与索引容器 */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-color);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      background-color: var(--search-bg);
+      color: var(--text-color);
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus {
+      border-color: var(--summary-color);
+    }
+
+    /* 快捷索引标签栏 */
+    .index-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+
+    .index-tag {
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      background-color: var(--index-bg);
+      color: var(--index-text);
+      border-radius: 16px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .index-tag:hover {
+      background-color: var(--summary-color);
+      color: #ffffff;
+    }
+
+    h1, h2, h3 { 
+      color: var(--text-color); 
+      border-bottom: 1px solid var(--border-color); 
+      padding-bottom: 8px;
+      scroll-margin-top: 140px; /* 防止锚点跳转时被吸顶栏遮挡 */
+    }
     
-    /* 提示框渲染 */
+    /* 提示框 */
     .tip-box {
       background: var(--tip-bg);
       border-left: 4px solid var(--tip-border);
@@ -89,28 +150,48 @@
       border-radius: 0 6px 6px 0;
     }
 
+    /* 取消 code 标签的高亮底色 */
     code {
-      background: var(--code-bg);
-      color: var(--code-color);
-      padding: 3px 6px;
-      border-radius: 4px;
-      font-size: 0.88em;
+      background: transparent !important;
+      color: inherit !important;
+      padding: 0 4px;
+      font-size: 0.9em;
+      opacity: 0.85;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      color: #94a3b8;
+      display: none;
     }
   </style>
 </head>
 <body>
 
+<!-- 顶部吸顶搜索框与章节索引 -->
+<div class="sticky-header">
+  <input type="text" id="search-input" class="search-box" placeholder="🔍 全局搜索：输入关键词（如：资金偏离、SOP、税筹、BOM、退换货...）" oninput="doSearch()">
+  <div id="index-tags" class="index-container">
+    <!-- 自动生成的索引按钮将插在这里 -->
+  </div>
+</div>
+
 <div id="content">
 <!-- 预留动态渲染区域 -->
 </div>
 
-<!-- 把你的完整 Markdown 贴在下面的 template 标签内 -->
+<div id="no-results-msg" class="no-results">
+  未找到与关键词匹配的题目，请尝试更改搜索词。
+</div>
+
+<!-- 请确保把你的全部 Markdown 内容粘贴到下方 template 标签中 -->
 <template id="markdown-source">
 
-# 财务主管/经理高频面试题库与专属实战答案
+# 财务主管/经理高频面试题库与实战解析
 
 ::: tip 💡 刷题小贴士
-点击题目名称即可展开查看专属解析，支持多道题目同时展开对比。
+上方提供全局实时搜索及章节快捷索引，点击索引标签可直达对应板块；输入关键词可全库模糊匹配。
 :::
 
 ## 一、 核心风控、亮点案例与系统提效
@@ -1138,16 +1219,72 @@
 </template>
 
 <script>
-  // 获取原始 Markdown 文本
+  // 1. 获取并渲染 Markdown
   let rawMd = document.getElementById('markdown-source').innerHTML;
   
-  // 转换 VitePress 的 ::: tip 语法为漂亮的提示框 HTML
+  // 转换 ::: tip 语法
   rawMd = rawMd.replace(/:::\s*tip\s*([\s\S]*?):::/g, function(match, p1) {
     return `<div class="tip-box">${p1.trim()}</div>`;
   });
 
-  // 使用 marked 渲染 Markdown
+  // 渲染成 HTML
   document.getElementById('content').innerHTML = marked.parse(rawMd);
+
+  // 2. 自动提取 H2 标题并生成顶部分类索引
+  function buildIndex() {
+    const h2Elements = document.querySelectorAll('#content h2');
+    const indexContainer = document.getElementById('index-tags');
+    
+    h2Elements.forEach((h2, index) => {
+      // 赋予 ID 方便跳转
+      const sectionId = 'section-' + index;
+      h2.id = sectionId;
+
+      // 创建索引标签
+      const tag = document.createElement('a');
+      tag.className = 'index-tag';
+      tag.href = '#' + sectionId;
+      tag.innerText = h2.innerText.replace(/^[一二三四五六七八九十]+\n*\s*/, ''); // 简化展示
+      indexContainer.appendChild(tag);
+    });
+  }
+
+  // 3. 全局实时模糊搜索功能
+  function doSearch() {
+    const keyword = document.getElementById('search-input').value.trim().toLowerCase();
+    const cards = document.querySelectorAll('#content details');
+    const sections = document.querySelectorAll('#content h2');
+    let hasMatch = false;
+
+    if (keyword === '') {
+      // 恢复默认状态
+      cards.forEach(card => {
+        card.style.display = 'block';
+        card.removeAttribute('open'); // 搜索清空时折叠
+      });
+      sections.forEach(sec => sec.style.display = 'block');
+      document.getElementById('no-results-msg').style.display = 'none';
+      return;
+    }
+
+    // 遍历所有折叠题库卡片
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      if (text.includes(keyword)) {
+        card.style.display = 'block';
+        card.setAttribute('open', 'true'); // 匹配到的题目自动展开答案
+        hasMatch = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // 控制无结果提示
+    document.getElementById('no-results-msg').style.display = hasMatch ? 'none' : 'block';
+  }
+
+  // 初始化执行索引生成
+  buildIndex();
 </script>
 
 </body>
