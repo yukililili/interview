@@ -120,10 +120,25 @@
       color: var(--tag-hover-text);
     }
 
-    h1, h2 { 
+    /* 消除解析器产生的空段落挤压 */
+    #content p:empty {
+      display: none !important;
+    }
+
+    /* 紧凑化 h2 章节标题与间距 */
+    h1 {
       color: var(--text-color); 
       border-bottom: 1px solid var(--border-color); 
       padding-bottom: 8px;
+    }
+
+    h2 { 
+      color: var(--text-color); 
+      border-bottom: 1px solid var(--border-color); 
+      padding-bottom: 6px;
+      margin-top: 20px !important;
+      margin-bottom: 12px !important;
+      font-size: 1.2rem;
       scroll-margin-top: 90px;
     }
     
@@ -137,7 +152,7 @@
       font-size: 0.9rem;
     }
 
-    /* 全局题目自动计数器核心逻辑 */
+    /* 全局题目自动计数器 */
     #content {
       counter-reset: q-num;
     }
@@ -148,7 +163,7 @@
       border: 1px solid var(--border-color);
       padding: 12px 14px;
       border-radius: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 10px !important;
       box-shadow: 0 1px 3px rgba(0,0,0,0.03);
       transition: background-color 0.3s, border-color 0.3s;
     }
@@ -161,19 +176,19 @@
       line-height: 1.5;
     }
 
-    /* 自动生成两位数序号前缀 (01. 02. 03...) */
+    /* 自动递增两位数序号 (01. 02. 03...) */
     summary b::before {
       counter-increment: q-num;
       content: counter(q-num, decimal-leading-zero) ". ";
       color: var(--summary-color);
     }
 
-    /* 全新专属答案框美化 */
+    /* 专属答案框 */
     .ans-box {
       background: var(--quote-bg);
       border-left: 4px solid var(--quote-border);
       padding: 14px 16px;
-      margin-top: 12px;
+      margin-top: 10px;
       border-radius: 0 8px 8px 0;
       font-size: 0.95rem;
       line-height: 1.8;
@@ -190,7 +205,7 @@
     }
 
     .ans-box p {
-      margin: 0 0 12px 0;
+      margin: 0 0 10px 0;
       text-align: justify;
     }
 
@@ -229,7 +244,7 @@
 
 <!-- 极简吸顶搜索与单行滑动索引 -->
 <div class="sticky-header">
-  <input type="text" id="search-input" class="search-box" placeholder="🔍 搜题目/关键词（如：SOP、资金偏离、BOM、职业规划、抗压能力...）" oninput="doSearch()">
+  <input type="text" id="search-input" class="search-box" placeholder="🔍 搜题目/关键词（如：SOP、资金偏离、向上管理、职业规划...）" oninput="doSearch()">
   <div id="index-tags" class="index-container">
     <!-- 自动生成的单行横向滑动标签 -->
   </div>
@@ -248,7 +263,7 @@
 # 财务主管/经理高频面试题库与实战解析
 
 ::: tip 💡 刷题小贴士
-输入关键词自动全库匹配并展开答案；顶部索引支持左右划动快速跳转板块。序号已实现完全全自动排序。
+输入关键词自动全库匹配并展开答案；顶部索引支持左右划动快速跳转板块。序号由系统自动递增排列。
 :::
 
 ## 一、 核心风控、亮点案例与系统提效
@@ -1659,7 +1674,6 @@ ESG 因素正逐渐从‘社会责任’转化为‘企业核心财务风险与�
       const tag = document.createElement('a');
       tag.className = 'index-tag';
       tag.href = '#' + sectionId;
-      // 简化章节展示文本
       tag.innerText = h2.innerText.replace(/^[一二三四五六七八九十]+[、\s]*/, '');
       indexContainer.appendChild(tag);
     });
