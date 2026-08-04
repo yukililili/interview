@@ -97,11 +97,11 @@
       white-space: nowrap;
       padding-bottom: 4px;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
     }
 
     .index-container::-webkit-scrollbar {
-      display: none; /* Chrome/Safari */
+      display: none;
     }
 
     .index-tag {
@@ -137,6 +137,11 @@
       font-size: 0.9rem;
     }
 
+    /* 全局题目自动计数器核心逻辑 */
+    #content {
+      counter-reset: q-num;
+    }
+
     /* 题库折叠卡片 */
     details {
       background: var(--card-bg);
@@ -154,6 +159,13 @@
       color: var(--summary-color);
       font-size: 1.01rem;
       line-height: 1.5;
+    }
+
+    /* 自动生成两位数序号前缀 (01. 02. 03...) */
+    summary b::before {
+      counter-increment: q-num;
+      content: counter(q-num, decimal-leading-zero) ". ";
+      color: var(--summary-color);
     }
 
     /* 全新专属答案框美化 */
@@ -217,7 +229,7 @@
 
 <!-- 极简吸顶搜索与单行滑动索引 -->
 <div class="sticky-header">
-  <input type="text" id="search-input" class="search-box" placeholder="🔍 搜题目/关键词（如：SOP、资金偏离、BOM、合并报表、业财融合...）" oninput="doSearch()">
+  <input type="text" id="search-input" class="search-box" placeholder="🔍 搜题目/关键词（如：SOP、资金偏离、BOM、职业规划、抗压能力...）" oninput="doSearch()">
   <div id="index-tags" class="index-container">
     <!-- 自动生成的单行横向滑动标签 -->
   </div>
@@ -236,13 +248,13 @@
 # 财务主管/经理高频面试题库与实战解析
 
 ::: tip 💡 刷题小贴士
-输入关键词自动全库匹配并展开答案；顶部索引支持左右划动快速跳转板块。
+输入关键词自动全库匹配并展开答案；顶部索引支持左右划动快速跳转板块。序号已实现完全全自动排序。
 :::
 
 ## 一、 核心风控、亮点案例与系统提效
 
 <details>
-<summary><b>01. 你在工作中做过的三件规避风险或提升效益的事</b> <code>核心亮点题</code></summary>
+<summary><b>你在工作中做过的三件规避风险或提升效益的事</b> <code>核心亮点题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -256,7 +268,7 @@
 </details>
 
 <details>
-<summary><b>02. 你在过往工作中，有哪些“业态深度协调”和“风控统筹”的经验？</b> <code>风控统筹题</code></summary>
+<summary><b>你在过往工作中，有哪些“业态深度协调”和“风控统筹”的经验？</b> <code>风控统筹题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -268,7 +280,7 @@
 </details>
 
 <details>
-<summary><b>03. 你做过预算管理吗？参与过 SAP / 费用控费系统（费控系统）从零到一的搭建与控制吗？</b> <code>数字化与系统题</code></summary>
+<summary><b>你做过预算管理吗？参与过 SAP / 费用控费系统（费控系统）从零到一的搭建与控制吗？</b> <code>数字化与系统题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -284,7 +296,7 @@
 </details>
 
 <details>
-<summary><b>04. 追问：费控系统具体怎么做超预算卡位？如果业务部门抱怨流程太繁琐怎么办？</b> <code>控费追问题</code></summary>
+<summary><b>追问：费控系统具体怎么做超预算卡位？如果业务部门抱怨流程太繁琐怎么办？</b> <code>控费追问题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -296,7 +308,7 @@
 </details>
 
 <details>
-<summary><b>05. 请分享几个日常琐碎工作提炼的高含金量案例（报销审核、疑难查账、数据自动化）</b> <code>日常升维进阶题</code></summary>
+<summary><b>请分享几个日常琐碎工作提炼的高含金量案例（报销审核、疑难查账、数据自动化）</b> <code>日常升维进阶题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -312,7 +324,7 @@
 ## 二、 资金管理、融资、制造业与跨行业迁移
 
 <details>
-<summary><b>06. 我们需要一个有资金风控、资金结算及融资经验的人，你在这方面经验如何？</b> <code>资金风控题</code></summary>
+<summary><b>我们需要一个有资金风控、资金结算及融资经验的人，你在这方面经验如何？</b> <code>资金风控题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -330,7 +342,7 @@
 </details>
 
 <details>
-<summary><b>07. 如果入职后需要你去对接银行续贷或做供应链融资，你觉得短板在哪里？打算怎么做？</b> <code>融资实操题</code></summary>
+<summary><b>如果入职后需要你去对接银行续贷或做供应链融资，你觉得短板在哪里？打算怎么做？</b> <code>融资实操题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -340,7 +352,7 @@
 </details>
 
 <details>
-<summary><b>08. 我们是跨境制造业（或其他行业），你过去偏向集团投资/服务业，没有我们行业的经验，怎么看？</b> <code>跨行业匹配题</code></summary>
+<summary><b>我们是跨境制造业（或其他行业），你过去偏向集团投资/服务业，没有我们行业的经验，怎么看？</b> <code>跨行业匹配题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -360,7 +372,7 @@
 </details>
 
 <details>
-<summary><b>09. 追问跨境制造细节：出口退税/汇兑损益如何核算？车间 BOM 损耗和工时怎么抓成本？</b> <code>行业实操追问</code></summary>
+<summary><b>追问跨境制造细节：出口退税/汇兑损益如何核算？车间 BOM 损耗和工时怎么抓成本？</b> <code>行业实操追问</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -372,7 +384,7 @@
 </details>
 
 <details>
-<summary><b>10. 你们以前那个制造业是什么模式？用什么系统？规模多大？（离散型组装成本）</b> <code>制造业成本实操题</code></summary>
+<summary><b>你们以前那个制造业是什么模式？用什么系统？规模多大？（离散型组装成本）</b> <code>制造业成本实操题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -384,7 +396,7 @@
 </details>
 
 <details>
-<summary><b>11. 你在子公司做财务经理时，是怎么给总经理做财务分析的？</b> <code>经营分析实践题</code></summary>
+<summary><b>你在子公司做财务经理时，是怎么给总经理做财务分析的？</b> <code>经营分析实践题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -402,7 +414,51 @@
 ## 三、 履历背景、架构定位、职责与薪资锚定
 
 <details>
-<summary><b>12. 你为什么选择离开现在的公司？在现公司待了这么久为什么想换机会？</b> <code>离职动机题</code></summary>
+<summary><b>你的 3-5 年职业规划？</b> <code>职业规划题</code></summary>
+
+<div class="ans-box">
+<div class="ans-title">💡【我的专属答案解析】</div>
+
+我的职业规划分为三个阶段：
+
+**1. 短期（1年内）：** 快速熟悉公司业务模式与进销存/资金闭环，梳理财税与资金风控 SOP，建立‘关键节点质控复核制’，保障团队凭证与结账零差错，实现每月 5 号前高效出表。
+
+**2. 中期（2-3年）：** 深耕业财融合与资金成本优化，推进全面预算与控费系统（费控系统）落地，通过量价拆解和三流合一为公司降本增效、规避法税风险，成为管理层最靠得住的财税与风控左膀右臂。
+
+**3. 长期（3-5年）：** 陪伴公司长期共同成长，随着公司业务扩展或资本化（如 IPO/融资），统筹全盘财务管理、法税风控与资本运营，成为既懂大厂规范内控、又能赋能业务的资深财务主管/经理。
+</div>
+</details>
+
+<details>
+<summary><b>说说你的优点和缺点？</b> <code>自我认知题</code></summary>
+
+<div class="ans-box">
+<div class="ans-title">💡【我的专属答案解析】</div>
+
+**优点方面：** 我有两大核心优势，一是‘17年稳健大厂底盘 + 法税复合能力’（211背景，持中级会计、中级经济师，通过法考及税务师核心科目），既懂大集团规范内控与合并报表，又能穿透进销存做‘三流合一’风险卡位；二是‘能下场建 SOP 与带教赋能’，擅长把财务要求转化为业务听得懂的语言，通过流程优化降本提效，并具备成熟的质控复核与带人经验。
+
+**缺点方面：** 早期在处理疑难账务与风控时，会过度追求过程细节的完美，在细节排查上耗费较多时间。现在我会采取‘抓大放小与分级卡位’策略，先设定关键卡位节点保障整体大盘进度与业务效率，再进行精细化复核，已经很好地平衡了风控底线与业务效率。
+</div>
+</details>
+
+<details>
+<summary><b>你的抗压能力怎么样？</b> <code>行为抗压力题</code></summary>
+
+<div class="ans-box">
+<div class="ans-title">💡【我的专属答案解析】</div>
+
+过往操盘集团多实体全盘、合并报表、月度 5 号前硬性关单以及应对外审与融资尽调，我长期处于高标准、高强度的风控与关单场景，抗压经验极其扎实。
+
+我的应对方式分为两点：
+
+**1. 目标前置与流程分解：** 面对复杂紧迫的任务（如月末关单或系统并行对账），我会倒排时间表、建立 SOP 并将大目标拆解为每日可落地的清单，依靠‘关键节点复核制’稳步推进，不被压力压垮。
+
+**2. 专业立威与主动沟通：** 遇到跨部门拉扯或卡点（如退换货单货票不符），凭借 17 年功底与法税知识直接下场给替代方案，主动与领导及业务对齐，协同解决问题而非独自硬扛。过往高压节点均实现了零差错平稳落地。
+</div>
+</details>
+
+<details>
+<summary><b>你为什么选择离开现在的公司？在现公司待了这么久为什么想换机会？</b> <code>离职动机题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -414,7 +470,7 @@
 </details>
 
 <details>
-<summary><b>13. 你在原公司干了 11 年为什么一直没有晋升？为什么拿 1 万块？现在凭什么要 1.5 万 - 2 万？</b> <code>薪资谈判与履历考问</code></summary>
+<summary><b>你在原公司干了 11 年为什么一直没有晋升？为什么拿 1 万块？现在凭什么要 1.5 万 - 2 万？</b> <code>薪资谈判与履历考问</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -430,7 +486,7 @@
 </details>
 
 <details>
-<summary><b>14. 电话面试：你目前在什么职位？处在哪个层级？手下有多少下属？上面有多少领导？</b> <code>电面第一轮筛查</code></summary>
+<summary><b>电话面试：你目前在什么职位？处在哪个层级？手下有多少下属？上面有多少领导？</b> <code>电面第一轮筛查</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -444,7 +500,7 @@
 </details>
 
 <details>
-<summary><b>15. 电话面试：你做过合并报表和财务分析，为什么现在主要做全盘账？是不是工作内容变简单了？</b> <code>轮岗定位题</code></summary>
+<summary><b>电话面试：你做过合并报表和财务分析，为什么现在主要做全盘账？是不是工作内容变简单了？</b> <code>轮岗定位题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -458,7 +514,7 @@
 </details>
 
 <details>
-<summary><b>16. 你对合并报表怎么理解？在实际工作中如何推进合并报表编制？</b> <code>合并报表实操题</code></summary>
+<summary><b>你对合并报表怎么理解？在实际工作中如何推进合并报表编制？</b> <code>合并报表实操题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -474,7 +530,7 @@
 </details>
 
 <details>
-<summary><b>17. 你们部门上面既有经理又有总监，你处于什么位置？平时带人吗？在团队里起什么作用？</b> <code>团队定位解毒题</code></summary>
+<summary><b>你们部门上面既有经理又有总监，你处于什么位置？平时带人吗？在团队里起什么作用？</b> <code>团队定位解毒题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -492,7 +548,7 @@
 </details>
 
 <details>
-<summary><b>18. 你现在具体负责什么工作？（四大核心板块合成版）</b> <code>岗位职责合成题</code></summary>
+<summary><b>你现在具体负责什么工作？（四大核心板块合成版）</b> <code>岗位职责合成题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -512,7 +568,7 @@
 </details>
 
 <details>
-<summary><b>19. 你们部门架构怎么分的？你有几个同事在做类似的事？（架构与定位）</b> <code>组织架构剖析题</code></summary>
+<summary><b>你们部门架构怎么分的？你有几个同事在做类似的事？（架构与定位）</b> <code>组织架构剖析题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -533,7 +589,7 @@
 ## 四、 团队管理与入职落地规划
 
 <details>
-<summary><b>20. 如果我有幸录用了你，你打算如何开展工作/管理工作？（跟业务结合的财务工作）</b> <code>工作开展规划题</code></summary>
+<summary><b>如果我有幸录用了你，你打算如何开展工作/管理工作？（跟业务结合的财务工作）</b> <code>工作开展规划题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -549,7 +605,7 @@
 </details>
 
 <details>
-<summary><b>21. 我们需要一个有管理经验的人，你没有/不够，凭什么应聘这个主管/经理职位？</b> <code>管理经验压力测试</code></summary>
+<summary><b>我们需要一个有管理经验的人，你没有/不够，凭什么应聘这个主管/经理职位？</b> <code>管理经验压力测试</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -567,7 +623,7 @@
 </details>
 
 <details>
-<summary><b>22. 追问：管理还包括绩效考核、招人辞人；如果老员工抵触新的 SOP 怎么办？</b> <code>团队管理冲突题</code></summary>
+<summary><b>追问：管理还包括绩效考核、招人辞人；如果老员工抵触新的 SOP 怎么办？</b> <code>团队管理冲突题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -579,7 +635,7 @@
 </details>
 
 <details>
-<summary><b>23. 请结合公司碎片（系统并行存货差异、研发费用无凭归集、结账慢/5号前出报表、内控八大循环、IPO基期元年、总部基地扩产），说明入职后一年内如何开展财务管理工作？</b> <code>综合主观大题</code></summary>
+<summary><b>请结合公司碎片（系统并行存货差异、研发费用无凭归集、结账慢/5号前出报表、内控八大循环、IPO基期元年、总部基地扩产），说明入职后一年内如何开展财务管理工作？</b> <code>综合主观大题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -615,7 +671,7 @@
 ## 五、 业财融合落地、面试反问与高阶真题
 
 <details>
-<summary><b>24. 你对‘业财融合’怎么理解？你在工作中是怎么做业财融合的？</b> <code>业财融合理解题</code></summary>
+<summary><b>你对‘业财融合’怎么理解？你在工作中是怎么做业财融合的？</b> <code>业财融合理解题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -633,7 +689,7 @@
 </details>
 
 <details>
-<summary><b>25. 你这都是偏后端的，如果你去我们公司，怎么帮我们前端业务做财务分析落地？（三步法）</b> <code>业财落地方法论</code></summary>
+<summary><b>你这都是偏后端的，如果你去我们公司，怎么帮我们前端业务做财务分析落地？（三步法）</b> <code>业财落地方法论</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -651,7 +707,7 @@
 </details>
 
 <details>
-<summary><b>26. 如何在业财例会/面试中展示你的业财例会推动力？</b> <code>例会推力实战题</code></summary>
+<summary><b>如何在业财例会/面试中展示你的业财例会推动力？</b> <code>例会推力实战题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -665,7 +721,7 @@
 </details>
 
 <details>
-<summary><b>27. 在面试结尾，当面试官问“你有什么问题想要了解的？”</b> <code>反客为主提问题</code></summary>
+<summary><b>在面试结尾，当面试官问“你有什么问题想要了解的？”</b> <code>反客为主提问题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -677,7 +733,7 @@
 </details>
 
 <details>
-<summary><b>28. 追问：“那你觉得这个职位需要什么样的特质？做出什么样的成绩？”</b> <code>高阶反击追问</code></summary>
+<summary><b>追问：“那你觉得这个职位需要什么样的特质？做出什么样的成绩？”</b> <code>高阶反击追问</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -697,7 +753,7 @@
 </details>
 
 <details>
-<summary><b>29. 针对初面 HR、复试部门 Leader、终面高管 Boss 的不同环节，你该如何表达？</b> <code>分轮面试表达策略</code></summary>
+<summary><b>针对初面 HR、复试部门 Leader、终面高管 Boss 的不同环节，你该如何表达？</b> <code>分轮面试表达策略</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -711,7 +767,7 @@
 </details>
 
 <details>
-<summary><b>30. 终面真题：内部经营管理视角与外部视角有什么区别？</b> <code>高管终面题</code></summary>
+<summary><b>终面真题：内部经营管理视角与外部视角有什么区别？</b> <code>高管终面题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -727,7 +783,7 @@
 </details>
 
 <details>
-<summary><b>31. 终面真题：上一段工作中协助公司成功融资，你具体做对了什么？</b> <code>融资实操题</code></summary>
+<summary><b>终面真题：上一段工作中协助公司成功融资，你具体做对了什么？</b> <code>融资实操题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -741,7 +797,7 @@
 </details>
 
 <details>
-<summary><b>32. 终面真题：为什么关注净资产和资产负债率？净资产和造血能力有什么关系？</b> <code>高阶财务指标题</code></summary>
+<summary><b>终面真题：为什么关注净资产和资产负债率？净资产和造血能力有什么关系？</b> <code>高阶财务指标题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -755,7 +811,7 @@
 </details>
 
 <details>
-<summary><b>33. 终面真题：经营现金流为负数，但利润为正，怎么向投资人/管理层解释？</b> <code>现金流透视题</code></summary>
+<summary><b>终面真题：经营现金流为负数，但利润为正，怎么向投资人/管理层解释？</b> <code>现金流透视题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -771,7 +827,7 @@
 </details>
 
 <details>
-<summary><b>34. 终面真题：如何看待过往履历时间/跳槽频率问题？</b> <code>履历考验题</code></summary>
+<summary><b>终面真题：如何看待过往履历时间/跳槽频率问题？</b> <code>履历考验题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -785,7 +841,7 @@
 ## 六、 业财融合、战略赋能与跨部门协调
 
 <details>
-<summary><b>35. 请谈谈你对业财融合的理解以及在实际工作中如何推进？</b> <code>业财融合题</code></summary>
+<summary><b>请谈谈你对业财融合的理解以及在实际工作中如何推进？</b> <code>业财融合题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -800,7 +856,7 @@
 </details>
 
 <details>
-<summary><b>36. 你认为财务部门在企业战略制定过程中应发挥怎样的作用？</b> <code>战略财务题</code></summary>
+<summary><b>你认为财务部门在企业战略制定过程中应发挥怎样的作用？</b> <code>战略财务题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -814,7 +870,7 @@
 </details>
 
 <details>
-<summary><b>37. 当与业务部门在财务决策上产生分歧时，你会如何协调？</b> <code>跨部门沟通题</code></summary>
+<summary><b>当与业务部门在财务决策上产生分歧时，你会如何协调？</b> <code>跨部门沟通题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -828,7 +884,7 @@
 </details>
 
 <details>
-<summary><b>38. 当企业员工对财务报销政策有疑问时，你会如何解答和宣传？</b> <code>服务与宣导题</code></summary>
+<summary><b>当企业员工对财务报销政策有疑问时，你会如何解答和宣传？</b> <code>服务与宣导题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -842,7 +898,7 @@
 </details>
 
 <details>
-<summary><b>39. 当企业要开拓新市场，财务部门应提供哪些支持？</b> <code>业务拓展题</code></summary>
+<summary><b>当企业要开拓新市场，财务部门应提供哪些支持？</b> <code>业务拓展题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -858,7 +914,7 @@
 ## 七、 现金流管理、资金筹划与危机应对
 
 <details>
-<summary><b>40. 当企业面临现金流紧张的情况，你会采取哪些措施来改善？</b> <code>资金救急题</code></summary>
+<summary><b>当企业面临现金流紧张的情况，你会采取哪些措施来改善？</b> <code>资金救急题</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -872,7 +928,7 @@
 </details>
 
 <details>
-<summary><b>41. 你如何处理企业的闲置资金？</b> <code>闲置资金管理</code></summary>
+<summary><b>你如何处理企业的闲置资金？</b> <code>闲置资金管理</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -886,7 +942,7 @@
 </details>
 
 <details>
-<summary><b>42. 请分享一次你应对财务危机的经历。</b> <code>危机处理实操</code></summary>
+<summary><b>请分享一次你应对财务危机的经历。</b> <code>危机处理实操</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -900,7 +956,7 @@
 </details>
 
 <details>
-<summary><b>43. 请分析一下不同结算方式对企业资金管理的影响。</b> <code>结算与资金流</code></summary>
+<summary><b>请分析一下不同结算方式对企业资金管理的影响。</b> <code>结算与资金流</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -916,7 +972,7 @@
 </details>
 
 <details>
-<summary><b>44. 你如何进行企业的营运资金管理？</b> <code>营运资金优化</code></summary>
+<summary><b>你如何进行企业的营运资金管理？</b> <code>营运资金优化</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -931,7 +987,7 @@
 </details>
 
 <details>
-<summary><b>45. 做好企业的应收账款管理，有哪些关键节点？</b> <code>应收账款管控</code></summary>
+<summary><b>做好企业的应收账款管理，有哪些关键节点？</b> <code>应收账款管控</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -947,7 +1003,7 @@
 ## 八、 成本结构拆解、量价分析与降本增效
 
 <details>
-<summary><b>46. 若要对企业的成本结构进行优化，你会从哪些方面入手？</b> <code>成本优化路径</code></summary>
+<summary><b>若要对企业的成本结构进行优化，你会从哪些方面入手？</b> <code>成本优化路径</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -961,7 +1017,7 @@
 </details>
 
 <details>
-<summary><b>47. 请分析一下当前宏观经济形势对企业财务管理的影响。</b> <code>宏观环境分析</code></summary>
+<summary><b>请分析一下当前宏观经济形势对企业财务管理的影响。</b> <code>宏观环境分析</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -975,7 +1031,7 @@
 </details>
 
 <details>
-<summary><b>48. 当企业利润出现下滑，你会如何进行财务分析并提出改进建议？</b> <code>利润诊断分析</code></summary>
+<summary><b>当企业利润出现下滑，你会如何进行财务分析并提出改进建议？</b> <code>利润诊断分析</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -989,7 +1045,7 @@
 </details>
 
 <details>
-<summary><b>49. 请谈谈你对成本效益原则的理解及在工作中的应用。</b> <code>成本效益原则</code></summary>
+<summary><b>请谈谈你对成本效益原则的理解及在工作中的应用。</b> <code>成本效益原则</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1002,7 +1058,7 @@
 </details>
 
 <details>
-<summary><b>50. 你如何进行企业的成本动因分析？</b> <code>成本动因与ABC法</code></summary>
+<summary><b>你如何进行企业的成本动因分析？</b> <code>成本动因与ABC法</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1016,7 +1072,7 @@
 </details>
 
 <details>
-<summary><b>51. 请分享一次你成功降低企业成本的案例。</b> <code>降本实操案例</code></summary>
+<summary><b>请分享一次你成功降低企业成本的案例。</b> <code>降本实操案例</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1028,7 +1084,7 @@
 </details>
 
 <details>
-<summary><b>52. 当企业产品价格发生变动时，你会如何进行成本核算和定价策略调整？</b> <code>价格变动与成本核算</code></summary>
+<summary><b>当企业产品价格发生变动时，你会如何进行成本核算和定价策略调整？</b> <code>价格变动与成本核算</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1044,7 +1100,7 @@
 ## 九、 税务筹划、稽查应对与法税风控
 
 <details>
-<summary><b>53. 请分享一次你成功进行税务筹划的案例。</b> <code>税筹实操案例</code></summary>
+<summary><b>请分享一次你成功进行税务筹划的案例。</b> <code>税筹实操案例</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1056,7 +1112,7 @@
 </details>
 
 <details>
-<summary><b>54. 你认为财务经理需要具备哪些法律知识？</b> <code>法税复合能力</code></summary>
+<summary><b>你认为财务经理需要具备哪些法律知识？</b> <code>法税复合能力</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1071,7 +1127,7 @@
 </details>
 
 <details>
-<summary><b>55. 请谈谈你对税务稽查的认识，如何应对税务稽查？</b> <code>税务稽查应对</code></summary>
+<summary><b>请谈谈你对税务稽查的认识，如何应对税务稽查？</b> <code>税务稽查应对</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1087,7 +1143,7 @@
 ## 十、 财务数字化转型与信息化系统建设
 
 <details>
-<summary><b>56. 你如何看待财务数字化转型，在之前的工作中有过相关实践吗？</b> <code>数字化转型实践</code></summary>
+<summary><b>你如何看待财务数字化转型，在之前的工作中有过相关实践吗？</b> <code>数字化转型实践</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1099,7 +1155,7 @@
 </details>
 
 <details>
-<summary><b>57. 你如何评价财务软件的优劣，在选择财务软件时会考虑哪些因素？</b> <code>软件选型评估</code></summary>
+<summary><b>你如何评价财务软件的优劣，在选择财务软件时会考虑哪些因素？</b> <code>软件选型评估</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1114,7 +1170,7 @@
 </details>
 
 <details>
-<summary><b>58. 请分享一次你主导的财务流程优化项目。</b> <code>流程优化实操</code></summary>
+<summary><b>请分享一次你主导的财务流程优化项目。</b> <code>流程优化实操</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1126,7 +1182,7 @@
 </details>
 
 <details>
-<summary><b>59. 你如何看待财务共享服务中心，企业是否有必要建立？</b> <code>财务共享视角</code></summary>
+<summary><b>你如何看待财务共享服务中心，企业是否有必要建立？</b> <code>财务共享视角</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1138,7 +1194,7 @@
 </details>
 
 <details>
-<summary><b>60. 请分享一下你在财务管理方面的创新举措。</b> <code>财务创新亮点</code></summary>
+<summary><b>请分享一下你在财务管理方面的创新举措。</b> <code>财务创新亮点</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1153,7 +1209,7 @@
 ## 十一、 内控体系、审计协同与合规卡位
 
 <details>
-<summary><b>61. 如何建立有效的财务风险预警机制？</b> <code>风险预警机制</code></summary>
+<summary><b>如何建立有效的财务风险预警机制？</b> <code>风险预警机制</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1167,7 +1223,7 @@
 </details>
 
 <details>
-<summary><b>62. 你如何看待内部审计在企业财务管理中的地位和作用？</b> <code>内部审计定位</code></summary>
+<summary><b>你如何看待内部审计在企业财务管理中的地位和作用？</b> <code>内部审计定位</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1181,7 +1237,7 @@
 </details>
 
 <details>
-<summary><b>63. 你如何确保企业财务信息的安全？</b> <code>数据与信息安全</code></summary>
+<summary><b>你如何确保企业财务信息的安全？</b> <code>数据与信息安全</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1195,7 +1251,7 @@
 </details>
 
 <details>
-<summary><b>64. 请分享一次你与外部审计师合作的经历。</b> <code>外审应对实操</code></summary>
+<summary><b>请分享一次你与外部审计师合作的经历。</b> <code>外审应对实操</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1209,7 +1265,7 @@
 </details>
 
 <details>
-<summary><b>65. 当企业存在多套账情况时，你会如何处理？</b> <code>多套账合规治理</code></summary>
+<summary><b>当企业存在多套账情况时，你会如何处理？</b> <code>多套账合规治理</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1223,7 +1279,7 @@
 </details>
 
 <details>
-<summary><b>66. 你如何看待财务造假问题，如何防范企业财务造假？</b> <code>反造假与内控</code></summary>
+<summary><b>你如何看待财务造假问题，如何防范企业财务造假？</b> <code>反造假与内控</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1239,7 +1295,7 @@
 ## 十二、 团队建设、标准 SOP 与效率提升
 
 <details>
-<summary><b>67. 你如何确保财务团队成员的工作质量和效率？</b> <code>团队提效与质控</code></summary>
+<summary><b>你如何确保财务团队成员的工作质量和效率？</b> <code>团队提效与质控</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1253,7 +1309,7 @@
 </details>
 
 <details>
-<summary><b>68. 面对新的会计准则变化，你会如何组织团队学习和适应？</b> <code>新准则落地执行</code></summary>
+<summary><b>面对新的会计准则变化，你会如何组织团队学习和适应？</b> <code>新准则落地执行</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1267,7 +1323,7 @@
 </details>
 
 <details>
-<summary><b>69. 如何对财务团队进行人才梯队建设？</b> <code>人才梯队培养</code></summary>
+<summary><b>如何对财务团队进行人才梯队建设？</b> <code>人才梯队培养</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1282,7 +1338,7 @@
 </details>
 
 <details>
-<summary><b>70. 你如何组织财务团队进行年度决算工作？</b> <code>年终决算管理</code></summary>
+<summary><b>你如何组织财务团队进行年度决算工作？</b> <code>年终决算管理</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1297,7 +1353,7 @@
 </details>
 
 <details>
-<summary><b>71. 你如何看待财务外包，企业哪些财务工作可以外包？</b> <code>财务外包边界</code></summary>
+<summary><b>你如何看待财务外包，企业哪些财务工作可以外包？</b> <code>财务外包边界</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1312,7 +1368,7 @@
 ## 十三、 管理会计工具、分析报告与决策支持
 
 <details>
-<summary><b>72. 请谈谈你对管理会计工具在企业应用的看法，举例说明你用过的工具及效果。</b> <code>管理会计工具</code></summary>
+<summary><b>请谈谈你对管理会计工具在企业应用的看法，举例说明你用过的工具及效果。</b> <code>管理会计工具</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1325,7 +1381,7 @@
 </details>
 
 <details>
-<summary><b>73. 你认为财务报告应如何更好地为企业管理层决策提供支持？</b> <code>决策支持报告</code></summary>
+<summary><b>你认为财务报告应如何更好地为企业管理层决策提供支持？</b> <code>决策支持报告</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1339,7 +1395,7 @@
 </details>
 
 <details>
-<summary><b>74. 你如何看待财务预测在企业管理中的作用，如何提高预测的准确性？</b> <code>动态财务预测</code></summary>
+<summary><b>你如何看待财务预测在企业管理中的作用，如何提高预测的准确性？</b> <code>动态财务预测</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1353,7 +1409,7 @@
 </details>
 
 <details>
-<summary><b>75. 请谈谈你对全面预算管理的认识，在预算执行过程中如何进行控制？</b> <code>全面预算管控</code></summary>
+<summary><b>请谈谈你对全面预算管理的认识，在预算执行过程中如何进行控制？</b> <code>全面预算管控</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1367,7 +1423,7 @@
 </details>
 
 <details>
-<summary><b>76. 你如何看待管理会计与财务会计的区别与联系？</b> <code>两会关系理解</code></summary>
+<summary><b>你如何看待管理会计与财务会计的区别与联系？</b> <code>两会关系理解</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1382,7 +1438,7 @@
 ## 十四、 投融资评估、资本开支与公司治理
 
 <details>
-<summary><b>77. 你如何评估企业投资项目的可行性？</b> <code>投资可行性评估</code></summary>
+<summary><b>你如何评估企业投资项目的可行性？</b> <code>投资可行性评估</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1396,7 +1452,7 @@
 </details>
 
 <details>
-<summary><b>78. 若企业要进行融资，你会优先选择哪种融资方式，为什么？</b> <code>融资策略选择</code></summary>
+<summary><b>若企业要进行融资，你会优先选择哪种融资方式，为什么？</b> <code>融资策略选择</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1410,7 +1466,7 @@
 </details>
 
 <details>
-<summary><b>79. 若企业要进行股权激励，财务部门需要做哪些工作？</b> <code>股权激励财务落地</code></summary>
+<summary><b>若企业要进行股权激励，财务部门需要做哪些工作？</b> <code>股权激励财务落地</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1424,7 +1480,7 @@
 </details>
 
 <details>
-<summary><b>80. 你如何评价企业的偿债能力，会关注哪些财务指标？</b> <code>偿债能力评估</code></summary>
+<summary><b>你如何评价企业的偿债能力，会关注哪些财务指标？</b> <code>偿债能力评估</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1438,7 +1494,7 @@
 </details>
 
 <details>
-<summary><b>81. 当企业进行资产重组时，财务部门需要做哪些工作？</b> <code>资产重组财务统筹</code></summary>
+<summary><b>当企业进行资产重组时，财务部门需要做哪些工作？</b> <code>资产重组财务统筹</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1452,7 +1508,7 @@
 </details>
 
 <details>
-<summary><b>82. 你如何看待 ESG（环境、社会和治理）因素在企业财务管理中的重要性？</b> <code>ESG 财务影响</code></summary>
+<summary><b>你如何看待 ESG（环境、社会和治理）因素在企业财务管理中的重要性？</b> <code>ESG 财务影响</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1466,7 +1522,7 @@ ESG 因素正逐渐从‘社会责任’转化为‘企业核心财务风险与�
 </details>
 
 <details>
-<summary><b>83. 当企业进行跨国经营时，财务管理会面临哪些挑战，你会如何应对？</b> <code>跨境财务管理</code></summary>
+<summary><b>当企业进行跨国经营时，财务管理会面临哪些挑战，你会如何应对？</b> <code>跨境财务管理</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
@@ -1480,7 +1536,7 @@ ESG 因素正逐渐从‘社会责任’转化为‘企业核心财务风险与�
 </details>
 
 <details>
-<summary><b>84. 请谈谈你对企业价值评估的方法和理解。</b> <code>企业估值与造血力</code></summary>
+<summary><b>请谈谈你对企业价值评估的方法和理解。</b> <code>企业估值与造血力</code></summary>
 
 <div class="ans-box">
 <div class="ans-title">💡【我的专属答案解析】</div>
